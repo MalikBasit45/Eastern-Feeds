@@ -1,0 +1,84 @@
+.dashboard-container {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+// Summary Cards Row
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.summary-card {
+    padding: 16px;
+
+    mat-card-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+
+        mat-icon {
+            font-size: 32px;
+            width: 32px;
+            height: 32px;
+            margin-right: 12px;
+            color: #757575;
+        }
+    }
+
+    .value {
+        font-size: 2em;
+        font-weight: bold;
+        color: #3f51b5;
+
+        &.warning {
+            color: #f44336;
+        }
+    }
+}
+
+// Charts Section Row
+.charts-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+
+    @media (max-width: 960px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.chart-card {
+    min-height: 400px;
+
+    mat-card-content.chart-container {
+        height: 300px;
+        display: block; // Important for ngx-charts sizing
+    }
+}
+
+// Table Section
+.table-card {
+    table {
+        width: 100%;
+
+        .warning-text {
+            color: #f44336;
+            font-weight: bold;
+        }
+    }
+
+    .no-data {
+        padding: 16px;
+        text-align: center;
+        color: #757575;
+        font-style: italic;
+    }
+}
+
+.full-width-table {
+    width: 100%;
+}

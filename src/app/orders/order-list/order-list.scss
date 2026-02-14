@@ -1,0 +1,55 @@
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+
+    h2 {
+        margin: 0;
+    }
+}
+
+table {
+    width: 100%;
+}
+
+.status-orange {
+    background-color: #ff9800 !important;
+    color: white !important;
+}
+
+.status-blue {
+    background-color: #2196f3 !important;
+    color: white !important;
+}
+
+.status-green {
+    background-color: #4caf50 !important;
+    color: white !important;
+}
+
+.status-red {
+    background-color: #f44336 !important;
+    color: white !important;
+}
+
+/* Material Chip overrides */
+::ng-deep .mat-mdc-chip.status-orange {
+    --mdc-chip-elevated-container-color: #ff9800;
+    --mdc-chip-label-text-color: white;
+}
+
+::ng-deep .mat-mdc-chip.status-blue {
+    --mdc-chip-elevated-container-color: #2196f3;
+    --mdc-chip-label-text-color: white;
+}
+
+::ng-deep .mat-mdc-chip.status-green {
+    --mdc-chip-elevated-container-color: #4caf50;
+    --mdc-chip-label-text-color: white;
+}
+
+::ng-deep .mat-mdc-chip.status-red {
+    --mdc-chip-elevated-container-color: #f44336;
+    --mdc-chip-label-text-color: white;
+}

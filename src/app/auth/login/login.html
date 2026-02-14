@@ -1,0 +1,73 @@
+<div class="login-container">
+    <div class="login-wrapper">
+        <mat-card class="login-card">
+            <mat-card-header>
+                <div class="logo-container">
+                    <img src="logo.svg" alt="Eastern Feeds" class="login-logo">
+                </div>
+                <mat-card-title>Login</mat-card-title>
+                <mat-card-subtitle>Enter your credentials to access the system</mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+                <!-- Error Message Area -->
+                <div class="error-container" *ngIf="errorMessage">
+                    <mat-icon>error_outline</mat-icon>
+                    <span>{{ errorMessage }}</span>
+                </div>
+
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Email Address</mat-label>
+                        <input matInput formControlName="email" placeholder="email@example.com" type="email">
+                        <mat-icon matSuffix>email</mat-icon>
+                        <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Email is required</mat-error>
+                        <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Please enter a valid
+                            email</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Password</mat-label>
+                        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+                        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+                            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is
+                            required</mat-error>
+                    </mat-form-field>
+
+                    <button mat-raised-button color="primary" class="login-button"
+                        [disabled]="loginForm.invalid || isLoading" type="submit">
+                        <span *ngIf="!isLoading">LOGIN</span>
+                        <span *ngIf="isLoading">AUTHENTICATING...</span>
+                    </button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+
+        <!-- Demo Credentials Card -->
+        <mat-card class="demo-card">
+            <mat-card-content>
+                <div class="demo-title">
+                    <mat-icon>info</mat-icon>
+                    <span>Demo Credentials</span>
+                </div>
+
+                <div class="demo-grid">
+                    <div class="demo-item">
+                        <span class="role-label">Admin:</span>
+                        <span class="cred-info">admin@ef.com / Admin123</span>
+                    </div>
+                    <div class="demo-item">
+                        <span class="role-label">Manager:</span>
+                        <span class="cred-info">manager@ef.com / Manager123</span>
+                    </div>
+                    <div class="demo-item">
+                        <span class="role-label">Staff:</span>
+                        <span class="cred-info">staff@ef.com / Staff123</span>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

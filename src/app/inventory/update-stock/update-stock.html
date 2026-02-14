@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>Update Stock</h2>
+<mat-dialog-content>
+  <form [formGroup]="form" class="stock-form">
+
+    <!-- Product Dropdown -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Select Product</mat-label>
+      <mat-select formControlName="product">
+        <mat-option *ngFor="let item of inventoryItems$ | async" [value]="item.product">
+          {{ item.product }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('product')?.hasError('required')">
+        Product is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Current Stock (Read-Only) -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Current Stock</mat-label>
+      <input matInput type="number" formControlName="currentStock">
+    </mat-form-field>
+
+    <!-- New Stock Input -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>New Stock</mat-label>
+      <input matInput type="number" formControlName="newStock" required min="0">
+      <mat-error *ngIf="form.get('newStock')?.hasError('required')">
+        New stock value is required
+      </mat-error>
+      <mat-error *ngIf="form.get('newStock')?.hasError('min')">
+        Stock cannot be negative
+      </mat-error>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="form.invalid">Save</button>
+</mat-dialog-actions>

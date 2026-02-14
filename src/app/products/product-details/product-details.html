@@ -1,0 +1,44 @@
+<section class="ef-product-details" *ngIf="product; else noProduct">
+  <button mat-button color="primary" type="button" (click)="backToList()">
+    <mat-icon>arrow_back</mat-icon>
+    <span>Back to Products</span>
+  </button>
+
+  <mat-card class="ef-product-card">
+    <mat-card-header>
+      <mat-card-title>{{ product.name }}</mat-card-title>
+      <mat-card-subtitle>ID: {{ product.id }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="ef-product-row">
+        <span class="ef-label">Category</span>
+        <span class="ef-value">{{ product.category }}</span>
+      </div>
+      <div class="ef-product-row">
+        <span class="ef-label">Price</span>
+        <span class="ef-value">{{
+          product.price | currency : 'NGN' : 'symbol-narrow'
+        }}</span>
+      </div>
+      <div class="ef-product-row">
+        <span class="ef-label">Stock</span>
+        <span class="ef-value">{{ product.stock }}</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>
+
+<ng-template #noProduct>
+  <section class="ef-product-details">
+    <button mat-button color="primary" type="button" (click)="backToList()">
+      <mat-icon>arrow_back</mat-icon>
+      <span>Back to Products</span>
+    </button>
+
+    <p class="ef-no-product">
+      Product not found. It may have been removed.
+    </p>
+  </section>
+</ng-template>
+

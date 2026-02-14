@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>{{ data.order ? 'Edit Order' : 'Create Order' }}</h2>
+<mat-dialog-content>
+    <form [formGroup]="form" class="order-form">
+
+        <!-- Customer Name -->
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Customer Name</mat-label>
+            <input matInput formControlName="customer" required>
+            <mat-error *ngIf="form.get('customer')?.hasError('required')">
+                Customer name is required
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Products Multi-Select -->
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Products</mat-label>
+            <mat-select formControlName="products" multiple required>
+                <mat-option *ngFor="let product of availableProducts" [value]="product.name">
+                    {{ product.name }} ({{ product.price | currency }})
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('products')?.hasError('required')">
+                At least one product is required
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Total Amount (Read-Only) -->
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Total Amount</mat-label>
+            <input matInput type="number" formControlName="total" readonly>
+            <span matPrefix>$&nbsp;</span>
+        </mat-form-field>
+
+        <!-- Status Dropdown (Visible mainly for Edit or if user wants to set initial status) -->
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status" required>
+                <mat-option *ngFor="let status of statusOptions" [value]="status">
+                    {{ status }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="save()" [disabled]="form.invalid">Save</button>
+</mat-dialog-actions>

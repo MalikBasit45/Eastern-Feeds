@@ -1,0 +1,68 @@
+.ef-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ef-dashboard-header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.ef-dashboard-subtitle {
+  margin: 0.25rem 0 0;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 0.9rem;
+}
+
+.ef-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+@media (max-width: 1199px) {
+  .ef-dashboard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .ef-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ef-stat-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.ef-stat-value {
+  margin: 0.5rem 0 0.25rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.ef-stat-label {
+  margin: 0;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 0.9rem;
+}
+
+.ef-stat-card.products mat-card-header {
+  border-bottom: 2px solid #3f51b5;
+}
+
+.ef-stat-card.orders mat-card-header {
+  border-bottom: 2px solid #009688;
+}
+
+.ef-stat-card.inventory mat-card-header {
+  border-bottom: 2px solid #ff9800;
+}
+
+.ef-stat-card.activity mat-card-header {
+  border-bottom: 2px solid #9c27b0;
+}

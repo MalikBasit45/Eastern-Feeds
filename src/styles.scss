@@ -1,0 +1,71 @@
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme((color: (primary: mat.$yellow-palette,
+        tertiary: mat.$orange-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    ));
+}
+
+// Global Brand Overrides
+:root {
+  --ef-primary: #D4AF37;
+  --ef-primary-dark: #B8860B;
+  --ef-accent: #3E2723;
+  --ef-white: #ffffff;
+  --ef-bg: #fcfcfc;
+
+  // Material 3 Variable Overrides
+  --mat-sys-primary: #D4AF37;
+  --mat-sys-on-primary: #ffffff;
+  --mat-sys-primary-container: #fef3cd;
+  --mat-sys-on-primary-container: #856404;
+
+  --mat-sys-secondary: #3E2723;
+  --mat-sys-on-secondary: #ffffff;
+
+  --mat-sys-surface: #ffffff;
+  --mat-sys-on-surface: #333333;
+}
+
+body {
+  color-scheme: light;
+  background-color: var(--ef-bg);
+  color: #333;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
+}
+
+html {
+  height: 100%;
+}
+
+// UI Polish
+.mat-mdc-raised-button {
+  background-color: var(--ef-primary) !important;
+  color: white !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 10px rgba(212, 175, 55, 0.2) !important;
+
+  &:hover:not(:disabled) {
+    background-color: var(--ef-primary-dark) !important;
+  }
+}
+
+.mat-mdc-card {
+  border-radius: 12px !important;
+  border: 1px solid rgba(0, 0, 0, 0.03) !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04) !important;
+}
+
+.mat-mdc-header-cell {
+  border-bottom: 2px solid var(--ef-primary) !important;
+  font-weight: 700 !important;
+  color: #444 !important;
+  text-transform: uppercase;
+  font-size: 0.7rem !important;
+  letter-spacing: 0.5px;
+}
