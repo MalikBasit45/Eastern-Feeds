@@ -8,6 +8,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../auth.service';
+import { MatSelectModule } from '@angular/material/select';
+
+
 
 @Component({
   selector: 'app-login',
@@ -18,6 +21,7 @@ import { AuthService } from '../auth.service';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
+     MatSelectModule,
     MatButtonModule,
     MatIconModule
   ],
@@ -37,26 +41,40 @@ export class LoginComponent {
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required]],
+      role: ['', [Validators.required]]
     });
   }
 
-  onSubmit(): void {
-    if (this.loginForm.valid) {
-      this.isLoading = true;
-      this.errorMessage = null;
-      const { email, password } = this.loginForm.value;
+  onSubmit() {
+  if (this.loginForm.invalid) return;
 
-      this.authService.login(email, password).subscribe({
-        next: () => {
-          this.isLoading = false;
-          this.router.navigate(['/dashboard']);
-        },
-        error: (err) => {
-          this.isLoading = false;
-          this.errorMessage = err.message || 'Invalid email or password';
-        }
-      });
+  const { email, password, role } = this.loginForm.value;
+
+  this.isLoading = true;
+  this.errorMessage = '';
+
+  this.authService.login(email, password).subscribe({
+    next: () => {
+      const currentUser = this.authService.getCurrentUser();
+
+      // Check if selected role matches the logged-in user
+      if (currentUser?.role !== role) {
+        this.errorMessage = 'Selected role does not match credentials';
+        this.authService.logout(); // optional: clear session
+        this.isLoading = false;
+        return;
+      }
+
+      // Role matches, navigate to dashboard
+      this.router.navigate(['/dashboard']);
+      this.isLoading = false;
+    },
+    error: (err) => {
+      this.errorMessage = err.message || 'Invalid email or password';
+      this.isLoading = false;
     }
-  }
+  });
+}
+
 }

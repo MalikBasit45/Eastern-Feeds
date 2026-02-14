@@ -35,6 +35,16 @@
                         <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is
                             required</mat-error>
                     </mat-form-field>
+                    <mat-form-field appearance="outline" class="full-width">
+  <mat-label>Select Role</mat-label>
+  <mat-select formControlName="role">
+    <mat-option value="Admin">Admin</mat-option>
+    <mat-option value="Manager">Manager</mat-option>
+    <mat-option value="Staff">Staff</mat-option>
+  </mat-select>
+  <mat-error *ngIf="loginForm.get('role')?.hasError('required')">Role is required</mat-error>
+</mat-form-field>
+
 
                     <button mat-raised-button color="primary" class="login-button"
                         [disabled]="loginForm.invalid || isLoading" type="submit">
